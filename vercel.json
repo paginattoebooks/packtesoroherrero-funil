@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "https://packtesoroherrero.paginatto.com/", "permanent": false }
+  ],
+  "headers": [
+    { "source": "/(upsell1|downsell1)/(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
+  ]
+}
