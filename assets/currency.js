@@ -132,6 +132,20 @@
     }).format(amount);
   }
 
+  // Recargo cambiario de la plataforma de pago (8,76%): se aplica una sola vez,
+  // DESPUÉS de convertir a la moneda local, para acercar el precio mostrado al del checkout.
+  var CHECKOUT_FX_MARKUP = 1.0876;
+
+  // USD base → moneda local (+ recargo), redondeado a los decimales de esa moneda.
+  function localAmount(usd, rate, currency, locale) {
+    var converted = usd * rate;
+    var final = converted * CHECKOUT_FX_MARKUP;
+    var digits = new Intl.NumberFormat(locale, { style: "currency", currency: currency })
+      .resolvedOptions().maximumFractionDigits;
+    var factor = Math.pow(10, digits);
+    return Math.round((final + Number.EPSILON) * factor) / factor;
+  }
+
   // Cada precio a convertir vive en un elemento con [data-usd] (y opcionalmente
   // [data-old-usd] para el precio tachado). Soporta múltiples planes en la página.
   function applyPriceElement(el, currency, locale, rate) {
@@ -140,7 +154,7 @@
 
     var target = el.classList.contains("price-new") ? el : el.querySelector(".price-new");
     if (target) {
-      var split = splitFormat(baseUsd * rate, currency, locale);
+      var split = splitFormat(localAmount(baseUsd, rate, currency, locale), currency, locale);
       var curEl = target.querySelector(".cur");
       var numEl = target.querySelector(".num");
       if (curEl) curEl.textContent = split.symbol;
@@ -150,7 +164,7 @@
     var oldUsdAttr = el.getAttribute("data-old-usd");
     if (oldUsdAttr) {
       var oldEl = el.querySelector(".price-old");
-      if (oldEl) oldEl.textContent = fullFormat(parseFloat(oldUsdAttr) * rate, currency, locale);
+      if (oldEl) oldEl.textContent = fullFormat(localAmount(parseFloat(oldUsdAttr), rate, currency, locale), currency, locale);
     }
   }
 
