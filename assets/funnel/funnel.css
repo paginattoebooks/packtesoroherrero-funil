@@ -172,3 +172,8 @@ footer.fn-footer{padding-bottom:calc(6.5rem + env(safe-area-inset-bottom,0px))}
 /* los cards se encogen en pantallas estrechas (320px) aunque el precio convertido sea largo */
 .fn-cards-wrap>*,.fn-pcard>*,.fn-bcard>*{min-width:0}
 .fn-bcard-price,.fn-pcard-price{flex-wrap:wrap}
+
+/* jerarquía de precios: Premium siempre mayor que el Básico */
+.fn-pcard-price .price-new .num{font-size:clamp(3rem,12vw,4.2rem)}
+.fn-bcard-price .price-new .num{font-size:1.6rem;line-height:1}
+@media(min-width:900px){.fn-cards-wrap{grid-template-columns:1.6fr 1fr}}

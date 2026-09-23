@@ -17,7 +17,6 @@
     "fn.bonus3_name": "The 10 biggest mistakes of a beginner blacksmith",
     "fn.bonus4_alt": "Steel types and their applications",
     "fn.bonus4_name": "Steel types and their applications",
-    "fn.card_cats": "8 categories: gates, trailers, furniture, structures, grills, gym equipment and more",
     "fn.card_ribbon": "Recommended",
     "fn.cta_pre": "I want the Premium Combo for",
     "fn.deal_kicker": "Get the <span class=\"accent\">Premium Combo</span> now for just:",

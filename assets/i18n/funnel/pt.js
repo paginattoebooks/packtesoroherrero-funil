@@ -17,7 +17,6 @@
     "fn.bonus3_name": "Os 10 maiores erros de um serralheiro iniciante",
     "fn.bonus4_alt": "Tipos de aço e suas aplicações",
     "fn.bonus4_name": "Tipos de aço e suas aplicações",
-    "fn.card_cats": "8 categorias: portões, reboques, móveis, estruturas, churrasqueiras, academia e mais",
     "fn.card_ribbon": "Recomendado",
     "fn.cta_pre": "Quero o Combo Premium por",
     "fn.deal_kicker": "Leve o <span class=\"accent\">Combo Premium</span> agora por apenas:",

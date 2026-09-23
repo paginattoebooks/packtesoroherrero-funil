@@ -17,7 +17,6 @@
     "fn.bonus3_name": "Les 10 plus grosses erreurs d'un forgeron débutant",
     "fn.bonus4_alt": "Types d'acier et leurs applications",
     "fn.bonus4_name": "Types d'acier et leurs applications",
-    "fn.card_cats": "8 catégories : portails, remorques, meubles, structures, grils, sport et plus",
     "fn.card_ribbon": "Recommandé",
     "fn.cta_pre": "Je veux le Combo Premium pour",
     "fn.deal_kicker": "Obtenez le <span class=\"accent\">Combo Premium</span> maintenant pour seulement :",

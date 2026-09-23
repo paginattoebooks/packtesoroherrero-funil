@@ -17,7 +17,6 @@
     "fn.bonus3_name": "I 10 errori più grandi di un fabbro principiante",
     "fn.bonus4_alt": "Tipi di acciaio e le loro applicazioni",
     "fn.bonus4_name": "Tipi di acciaio e le loro applicazioni",
-    "fn.card_cats": "8 categorie: cancelli, rimorchi, mobili, strutture, griglie, palestra e altro",
     "fn.card_ribbon": "Consigliato",
     "fn.cta_pre": "Voglio il Combo Premium a",
     "fn.deal_kicker": "Prendi il <span class=\"accent\">Combo Premium</span> ora a soli:",

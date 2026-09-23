@@ -17,7 +17,6 @@
     "fn.bonus3_name": "Die 10 größten Fehler eines Schmiede-Anfängers",
     "fn.bonus4_alt": "Stahlarten und ihre Anwendungen",
     "fn.bonus4_name": "Stahlarten und ihre Anwendungen",
-    "fn.card_cats": "8 Kategorien: Tore, Anhänger, Möbel, Strukturen, Grills, Fitnessgeräte und mehr",
     "fn.card_ribbon": "Empfohlen",
     "fn.cta_pre": "Ich will die Premium-Combo für",
     "fn.deal_kicker": "Hol dir die <span class=\"accent\">Premium-Combo</span> jetzt für nur:",

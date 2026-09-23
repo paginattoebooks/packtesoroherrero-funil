@@ -17,7 +17,6 @@
     "fn.bonus3_name": "Los 10 mayores errores de un herrero principiante",
     "fn.bonus4_alt": "Tipos de acero y sus aplicaciones",
     "fn.bonus4_name": "Tipos de acero y sus aplicaciones",
-    "fn.card_cats": "8 categorías: portones, remolques, muebles, estructuras, parrillas, gimnasio y más",
     "fn.card_ribbon": "Recomendado",
     "fn.cta_pre": "Quiero el Combo Premium por",
     "fn.deal_kicker": "Lleva el <span class=\"accent\">Combo Premium</span> ahora por solo:",
