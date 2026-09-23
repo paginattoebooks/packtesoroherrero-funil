@@ -2,242 +2,16 @@
    FUNNEL (upsell / downsell) — funnel.css
    Se carga DESPUÉS de theme.css y reutiliza sus variables,
    tipografías, botones, marco de esquinas y fondo blueprint.
+   Arquitectura: oferta → card Premium + card Básico →
+   3 razones → bonos → garantía + FAQ → CTA final.
    ========================================================= */
 
-/* ---------- barra de progreso del pedido ---------- */
-.fn-progress{background:var(--bg-alt);border-bottom:1px solid var(--line);padding:.7rem var(--gutter)}
-.fn-progress ol{
-  list-style:none;margin:0 auto;padding:0;max-width:560px;
-  display:flex;align-items:center;justify-content:center;gap:.5rem;
-  font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);
-}
-.fn-progress li{display:flex;align-items:center;gap:.45em;white-space:nowrap;min-width:0}
-.fn-progress li+li::before{content:"";width:clamp(12px,4vw,34px);height:1px;background:var(--line-strong);margin-right:.2rem;flex-shrink:0}
-.fn-progress .n{
-  width:18px;height:18px;border-radius:50%;border:1px solid var(--line-strong);
-  display:inline-flex;align-items:center;justify-content:center;font-size:.6rem;flex-shrink:0;
-}
-.fn-progress .n svg{width:11px;height:11px}
-.fn-progress .done{color:var(--ink)}
-.fn-progress .done .n{background:var(--green);border-color:var(--green);color:#04160c}
-.fn-progress .current{color:var(--gold)}
-.fn-progress .current .n{border-color:var(--gold);color:var(--gold);box-shadow:0 0 0 3px rgba(231,165,68,.12)}
-@media(max-width:374px){.fn-progress .lbl-opt{display:none}}
+.fn-page section{padding-block:clamp(2.75rem,6vw,4.5rem)}
+.fn-center{text-align:center;display:flex;flex-direction:column;align-items:center}
+.fn-h2{font-size:clamp(1.5rem,4vw,2.1rem);text-transform:uppercase;line-height:1.15;text-align:center}
 
-/* ---------- hero ---------- */
-.fn-hero{padding-block:clamp(2rem,6vw,4rem)}
-.fn-hero .container{display:grid;gap:clamp(2rem,5vw,3.5rem);grid-template-columns:1fr;align-items:center}
-.fn-hero .container>*{min-width:0}
-
-.fn-highlights{margin-top:1.5rem;display:flex;flex-direction:column;gap:.7rem}
-.fn-highlights li{display:flex;gap:.7em;font-size:.95rem;color:var(--ink);line-height:1.5}
-.fn-highlights svg{width:18px;height:18px;flex-shrink:0;margin-top:.15em;color:var(--green)}
-.fn-highlights b{color:var(--white);font-weight:600}
-
-
-/* bloque de precio (compatible con currency.js: [data-usd] > .price-new > .cur/.num, .price-old) */
-.fn-price{
-  margin-top:1rem;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.6rem;
-  position:relative;z-index:1;
-}
-.fn-price .was,.fn-price .now{display:flex;flex-direction:column;gap:.15rem}
-.fn-price .was{align-items:flex-end;text-align:right}
-.fn-price .now{align-items:flex-start}
-.fn-price .lbl{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);line-height:1.3}
-.fn-price .price-old{font-size:1rem}
-.fn-price .arrow{width:18px;height:18px;color:var(--copper);transform:rotate(-90deg)}
-.fn-price .price-new .num{font-size:clamp(2.4rem,9vw,3.2rem)}
-.fn-price-note{margin-top:.7rem;text-align:center;font-size:.74rem;color:var(--ink-dim);position:relative;z-index:1}
-
-.fn-cta{margin-top:1.4rem;position:relative;z-index:1;display:flex;flex-direction:column;align-items:stretch}
-.fn-cta .btn{width:100%;font-size:clamp(.88rem,2.4vw,.98rem);padding-block:1.15rem}
-.fn-cta .microcopy{margin-top:.7rem}
-
-/* enlace de rechazo: menos peso visual, pero legible y fácil de tocar */
-.fn-decline{
-  display:block;margin:.9rem auto 0;padding:.6rem .5rem;min-height:44px;
-  text-align:center;font-size:.86rem;color:var(--ink-dim);line-height:1.4;
-  text-decoration:underline;text-decoration-color:rgba(139,150,154,.5);text-underline-offset:3px;
-  transition:color .18s ease;
-}
-.fn-decline:hover{color:var(--ink);text-decoration-color:currentColor}
-
-/* checkout sin configurar */
-.btn.is-pending{filter:grayscale(1);opacity:.55;cursor:not-allowed;pointer-events:none}
-.btn.is-pending::after{content:"· checkout ?";font-family:var(--font-mono);font-size:.7em;text-transform:none;opacity:.9}
-
-/* precio en línea (dentro de textos / tablas) */
-.price-new.pi{display:inline-flex;gap:.12rem;font-family:inherit;color:inherit;align-items:baseline}
-.price-new.pi .cur{font-size:1em;opacity:1}
-.price-new.pi .num{font-size:1em;line-height:inherit}
-
-/* ---------- contexto: elección actual vs oferta ---------- */
-.fn-context{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);grid-template-columns:1fr}
-@media(min-width:760px){.fn-context{grid-template-columns:1fr 1fr}}
-.fn-context-col{background:var(--bg-alt);padding:clamp(1.3rem,3vw,2rem)}
-.fn-context-col.up{background:linear-gradient(180deg,rgba(231,165,68,.08),var(--card) 60%)}
-.fn-context-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
-.fn-context-head .k{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
-.fn-context-col.up .k{color:var(--gold)}
-.fn-context-head h3{margin-top:.35rem;font-size:1.35rem;text-transform:uppercase}
-.fn-context-head .pi{font-family:var(--font-display);font-size:1.25rem;color:var(--ink)}
-.fn-context-col.up .fn-context-head .pi{color:var(--gold)}
-.fn-context-col ul{margin-top:1.1rem;display:flex;flex-direction:column;gap:.55rem}
-.fn-context-col li{display:flex;gap:.6em;font-size:.92rem;color:var(--ink)}
-.fn-context-col li svg{width:16px;height:16px;flex-shrink:0;margin-top:.2em;color:var(--green)}
-.fn-context-col .plus{margin-top:1rem;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--copper)}
-.fn-why{margin-top:1.6rem;text-align:center;max-width:62ch;margin-inline:auto;font-size:.98rem;color:var(--ink)}
-
-/* ---------- qué incluye ---------- */
-.fn-inc-grid{display:grid;gap:1rem;grid-template-columns:repeat(2,1fr)}
-@media(min-width:1024px){.fn-inc-grid{grid-template-columns:repeat(4,1fr)}}
-.fn-inc-card{background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden}
-.fn-inc-card .img{aspect-ratio:4/5;overflow:hidden;background:var(--bg-alt)}
-.fn-inc-card img{width:100%;height:100%;object-fit:cover;filter:grayscale(35%);transition:transform .5s ease,filter .5s ease}
-.fn-inc-card:hover img{transform:scale(1.05);filter:grayscale(0)}
-.fn-inc-card .txt{padding:.8rem .85rem 1rem;font-size:.86rem;font-weight:600;color:var(--white);line-height:1.35;border-top:1px solid var(--line)}
-.fn-chips{margin-top:1rem;display:grid;gap:.7rem;grid-template-columns:1fr}
-@media(min-width:560px){.fn-chips{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1024px){.fn-chips{grid-template-columns:repeat(4,1fr)}}
-.fn-chips li{
-  display:flex;align-items:center;gap:.65rem;background:var(--card);border:1px solid var(--line);
-  padding:.85rem 1rem;font-size:.88rem;color:var(--ink);font-weight:500;
-}
-.fn-chips svg{width:20px;height:20px;color:var(--copper);flex-shrink:0}
-
-/* ---------- producto principal ---------- */
-.fn-feature{display:grid;gap:clamp(1.8rem,5vw,3.5rem);grid-template-columns:1fr;align-items:center}
-.fn-feature>*{min-width:0}
-@media(min-width:880px){.fn-feature{grid-template-columns:.9fr 1.1fr}}
-.fn-feature .hero-panel .mockup{max-width:320px}
-.fn-feature h2{font-size:clamp(1.6rem,4.2vw,2.35rem);text-transform:uppercase;line-height:1.12}
-.fn-feature h2 span{color:var(--gold)}
-.fn-feature p.body{margin-top:1rem;color:var(--ink)}
-.fn-specs{margin-top:1.5rem;display:grid;gap:.7rem;grid-template-columns:repeat(2,1fr)}
-.fn-specs li{background:var(--card);border:1px solid var(--line);padding:.9rem .95rem;display:flex;flex-direction:column;gap:.35rem}
-.fn-specs strong{font-family:var(--font-display);color:var(--white);font-size:1.3rem;line-height:1}
-.fn-specs span{font-size:.8rem;color:var(--ink-dim);line-height:1.35}
-
-/* ---------- bonus ---------- */
-.fn-bonus-grid{display:grid;gap:1rem;grid-template-columns:1fr}
-@media(min-width:560px){.fn-bonus-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1024px){.fn-bonus-grid{grid-template-columns:repeat(4,1fr)}}
-.fn-bonus{
-  background:var(--card);border:1px solid var(--line);padding:1.2rem;
-  display:grid;grid-template-columns:96px 1fr;gap:1rem;align-items:center;
-  transition:border-color .25s ease,transform .25s ease;
-}
-@media(min-width:1024px){.fn-bonus{grid-template-columns:1fr;text-align:center;justify-items:center}}
-.fn-bonus:hover{border-color:var(--gold);transform:translateY(-3px)}
-.fn-bonus img{width:96px;height:96px;object-fit:contain}
-@media(min-width:1024px){.fn-bonus img{width:150px;height:150px}}
-.fn-bonus .tag{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;color:var(--copper);text-transform:uppercase}
-.fn-bonus h3{margin-top:.3rem;font-family:var(--font-body);font-size:.95rem;font-weight:700;line-height:1.3;color:var(--white);letter-spacing:0}
-.fn-bonus p{margin-top:.4rem;font-size:.82rem;color:var(--ink-dim);line-height:1.45}
-
-/* ---------- tabla comparativa ---------- */
-.fn-table-wrap{max-width:860px;margin-inline:auto;border:1px solid var(--line-strong);background:var(--card)}
-.fn-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:clamp(.78rem,2.3vw,.92rem)}
-.fn-table th,.fn-table td{padding:.8rem clamp(.5rem,2vw,1.1rem);border-top:1px solid var(--line);vertical-align:middle;overflow-wrap:anywhere}
-.fn-table thead th{border-top:0;font-family:var(--font-display);text-transform:uppercase;font-weight:600;color:var(--white);font-size:clamp(.82rem,2.4vw,1rem);letter-spacing:.02em;line-height:1.2}
-.fn-table th:first-child,.fn-table td:first-child{text-align:left}
-.fn-table col.feat{width:48%}
-@media(min-width:640px){.fn-table col.feat{width:54%}}
-.fn-table td:not(:first-child),.fn-table th:not(:first-child){text-align:center}
-.fn-table tbody th{font-weight:500;color:var(--ink);text-align:left}
-.fn-table .hl{background:rgba(231,165,68,.07)}
-.fn-table thead .hl{color:var(--gold);box-shadow:inset 0 3px 0 var(--gold)}
-.fn-table svg{width:18px;height:18px;margin-inline:auto}
-.fn-table .yes{color:var(--green)}
-.fn-table .no{color:var(--ink-dim);opacity:.6}
-.fn-table .val{font-family:var(--font-display);color:var(--white)}
-.fn-table .hl .val{color:var(--gold)}
-.fn-table tr.price-tr td,.fn-table tr.price-tr th{border-top:1px solid var(--line-strong);font-size:1.05em}
-.fn-table-note{max-width:860px;margin:.8rem auto 0;text-align:center;font-size:.76rem;color:var(--ink-dim)}
-
-/* ---------- resumen de valor ---------- */
-.fn-summary{
-  max-width:860px;margin-inline:auto;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);
-  grid-template-columns:1fr;
-}
-@media(min-width:640px){.fn-summary{grid-template-columns:repeat(2,1fr)}}
-.fn-summary li{background:var(--card);padding:1.2rem 1.3rem;display:flex;gap:.9rem;align-items:flex-start}
-.fn-summary svg{width:24px;height:24px;color:var(--copper);flex-shrink:0}
-.fn-summary strong{display:block;color:var(--white);font-weight:600;font-size:.95rem}
-.fn-summary span{display:block;margin-top:.2rem;font-size:.86rem;color:var(--ink-dim);line-height:1.5}
-.fn-guarantee{
-  max-width:860px;margin:1.2rem auto 0;display:flex;gap:1rem;align-items:flex-start;
-  border:1px dashed var(--line-strong);padding:1.2rem 1.3rem;background:rgba(12,16,18,.5);
-}
-.fn-guarantee svg{width:38px;height:38px;color:var(--gold);flex-shrink:0}
-.fn-guarantee h3{font-size:1.05rem;text-transform:uppercase}
-.fn-guarantee p{margin-top:.35rem;font-size:.9rem;color:var(--ink)}
-
-/* ---------- FAQ (acordeón con botones) ---------- */
-.fn-faq{max-width:var(--container-narrow);margin-inline:auto;display:flex;flex-direction:column;gap:.6rem}
-.fn-faq-item{background:var(--card);border:1px solid var(--line)}
-.fn-faq-item h3{margin:0;font-family:var(--font-body);font-size:inherit;letter-spacing:0}
-.fn-faq-trigger{
-  width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;text-align:left;
-  padding:1.05rem 1.2rem;font-weight:600;color:var(--gold);font-size:.95rem;line-height:1.4;
-}
-.fn-faq-trigger svg{width:18px;height:18px;flex-shrink:0;transition:transform .25s ease;color:var(--copper)}
-.fn-faq-trigger[aria-expanded="true"] svg{transform:rotate(180deg)}
-.fn-faq-panel{padding:0 1.2rem 1.2rem;font-size:.9rem;color:var(--ink);line-height:1.65}
-
-/* ---------- CTA final ---------- */
-.fn-final{
-  max-width:880px;margin-inline:auto;background:var(--card);border:1px solid var(--gold);
-  box-shadow:0 0 0 1px rgba(231,165,68,.35),0 30px 70px -24px rgba(231,165,68,.28);
-  padding:clamp(1.5rem,4vw,2.6rem);display:grid;gap:clamp(1.5rem,4vw,2.5rem);grid-template-columns:1fr;align-items:center;
-}
-.fn-final>*{min-width:0}
-@media(min-width:760px){.fn-final{grid-template-columns:.8fr 1.2fr}}
-.fn-final .mockup{max-width:220px}
-.fn-final h2{font-size:clamp(1.5rem,4vw,2.1rem);text-transform:uppercase;line-height:1.1}
-.fn-final .fn-price{grid-template-columns:auto auto 1fr;justify-content:start;margin-top:1.1rem}
-.fn-final .fn-price .was{align-items:flex-start;text-align:left}
-.fn-final .offer-list{margin-top:1.2rem}
-
-/* ---------- sticky móvil ---------- */
-.sticky-cta.fn-sticky{padding-bottom:calc(.65rem + env(safe-area-inset-bottom,0px))}
-.sticky-cta.fn-sticky .btn{white-space:nowrap}
-footer.fn-footer{padding-bottom:calc(6.5rem + env(safe-area-inset-bottom,0px))}
-
-/* foco visible (teclado) */
-.fn-page a:focus-visible,.fn-page button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.fn-page .btn:focus-visible{outline-offset:4px}
-
-/* mockup: flotación sutil */
-@media(prefers-reduced-motion:no-preference){
-  .fn-float{animation:fnFloat 6s ease-in-out infinite}
-}
-@keyframes fnFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-
-/* utilidades */
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-
-/* pilares "por qué existe esta opción" */
-.fn-pillars{display:grid;gap:1rem;grid-template-columns:1fr;max-width:980px;margin-inline:auto}
-@media(min-width:760px){.fn-pillars{grid-template-columns:repeat(3,1fr)}}
-.fn-pillars li{background:var(--card);border:1px solid var(--line);padding:1.4rem 1.3rem}
-.fn-pillars svg{width:26px;height:26px;color:var(--gold)}
-.fn-pillars strong{display:block;margin-top:.8rem;font-family:var(--font-display);font-weight:600;text-transform:uppercase;color:var(--white);font-size:1.1rem;letter-spacing:.01em}
-.fn-pillars span{display:block;margin-top:.4rem;font-size:.9rem;color:var(--ink);line-height:1.55}
-
-/* lista completa del combo en 2 columnas */
-.fn-list-card{max-width:900px;margin-inline:auto;background:var(--card);border:1px solid var(--line-strong);padding:clamp(1.3rem,4vw,2.2rem)}
-.fn-list-card .offer-list{margin-top:0;display:grid;gap:.7rem 1.6rem;grid-template-columns:1fr}
-@media(min-width:720px){.fn-list-card .offer-list{grid-template-columns:1fr 1fr}}
-
-
-/* =========================================================
-   PRIMERA DOBRA (upsell y downsell comparten estructura:
-   el precio ocupa la misma posición en ambas páginas)
-   ========================================================= */
-.fn-deal-wrap{align-items:center}
-@media(min-width:960px){.fn-hero .fn-deal-wrap{grid-template-columns:1.12fr .88fr;gap:clamp(2.5rem,5vw,4.5rem)}}
+/* ---------- 1. oferta (primera dobra) ---------- */
+.fn-page .fn-hero{padding-block:clamp(2rem,6vw,3.75rem) clamp(2rem,5vw,3rem)}
 
 /* sello: ¡Oferta mejor! (dorado) / ¡Última oportunidad! (rojo óxido de la paleta) */
 .fn-badge{
@@ -252,39 +26,149 @@ footer.fn-footer{padding-bottom:calc(6.5rem + env(safe-area-inset-bottom,0px))}
 .fn-badge svg{width:1em;height:1em;flex-shrink:0}
 .fn-badge.last{background:var(--red);color:#fff4ea;box-shadow:0 10px 30px -12px rgba(192,71,46,.7)}
 
-.fn-deal-kicker{
-  margin-top:1.1rem;font-size:clamp(1.3rem,4.4vw,2.05rem);line-height:1.15;text-transform:uppercase;
-}
+.fn-deal-kicker{margin-top:1.2rem;font-size:clamp(1.3rem,4.4vw,2rem);line-height:1.15;text-transform:uppercase}
 
 /* precio protagonista */
-.fn-deal-price{margin-top:.35rem}
+.fn-deal-price{margin-top:.35rem;display:flex;flex-direction:column;align-items:center}
 .fn-deal-price .price-new{align-items:flex-start;gap:.3rem;color:var(--gold);text-shadow:0 0 42px rgba(231,165,68,.28)}
 .fn-deal-price .price-new .cur{font-size:clamp(1.5rem,5vw,2.4rem);line-height:1;margin-top:.55em;opacity:.9}
-.fn-deal-price .price-new .num{font-size:clamp(5rem,21vw,8.6rem);line-height:.92;letter-spacing:-.01em}
-.fn-deal-ref{margin-top:.5rem;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
-.fn-deal-ref .price-old{font-size:.9rem;margin-left:.3em}
+.fn-deal-price .price-new .num{font-size:clamp(5.2rem,23vw,9rem);line-height:.92;letter-spacing:-.01em}
+.fn-deal-ref{margin-top:.45rem;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
+.fn-deal-ref .price-old{font-size:.88rem;margin-left:.3em}
 
-.fn-deal-text{margin-top:1.2rem;font-size:clamp(1rem,2.3vw,1.1rem);color:var(--ink);max-width:54ch}
-.fn-deal-choice{margin-top:.9rem;font-size:.95rem;color:var(--ink-dim);max-width:54ch}
-.fn-deal-choice .pi{color:var(--white);font-weight:600}
-.fn-deal .fn-cta{max-width:540px}
-.fn-deal .fn-decline{margin-inline:0;text-align:left;padding-inline:0}
-.fn-cta .btn .pi{font-weight:800;white-space:nowrap}
-.fn-decline .pi{white-space:nowrap}
+.fn-deal-text{margin-top:1.1rem;font-size:clamp(1rem,2.3vw,1.1rem);color:var(--ink);max-width:48ch}
+.fn-deal-choice{margin-top:1rem;font-size:.9rem;color:var(--ink-dim);max-width:48ch}
 
-/* lado visual: mockup + valor */
-.fn-deal-visual .hero-panel .mockup{max-width:300px}
-.fn-deal-visual .fn-highlights{margin-top:1.8rem}
+.fn-cta{margin-top:1.4rem;width:100%;max-width:520px;display:flex;flex-direction:column;align-items:stretch}
+.fn-cta .btn{display:block;width:100%;text-align:center;font-size:clamp(.9rem,2.5vw,1rem);padding-block:1.15rem}
+.fn-cta .microcopy{margin-top:.7rem}
+.btn .pi{display:inline;font-weight:800;white-space:nowrap}
 
-/* móvil: selo, Combo Premium y precio arriba; el mockup no empuja el precio */
-@media(max-width:959px){
-  .fn-hero .fn-deal-wrap{gap:2.2rem}
-  .fn-deal-visual .hero-panel .mockup{max-width:210px}
+/* enlace de rechazo (CTA final): menos peso visual, pero legible y fácil de tocar */
+.fn-decline{
+  display:block;margin:.8rem auto 0;padding:.6rem .5rem;min-height:44px;
+  text-align:center;font-size:.86rem;color:var(--ink-dim);line-height:1.4;
+  text-decoration:underline;text-decoration-color:rgba(139,150,154,.5);text-underline-offset:3px;
+  transition:color .18s ease;
 }
-@media(max-width:479px){
-  .fn-hero{padding-block:1.6rem 2.5rem}
-  .fn-deal-kicker{margin-top:.9rem}
+.fn-decline:hover{color:var(--ink);text-decoration-color:currentColor}
+.fn-decline .pi{display:inline;white-space:nowrap}
+
+/* checkout sin configurar */
+.btn.is-pending{filter:grayscale(1);opacity:.55;cursor:not-allowed;pointer-events:none}
+.btn.is-pending::after{content:" · checkout ?";font-family:var(--font-mono);font-size:.7em;text-transform:none;opacity:.9}
+
+/* precio en línea */
+.price-new.pi{display:inline-flex;gap:.12rem;font-family:inherit;color:inherit;align-items:baseline}
+.price-new.pi .cur{font-size:1em;opacity:1}
+.price-new.pi .num{font-size:1em;line-height:inherit}
+
+/* ---------- 2. cards: Premium (recomendado) + Básico (secundario) ---------- */
+.fn-page .fn-cards{padding-top:.5rem}
+.fn-cards-wrap{display:grid;gap:1.6rem;grid-template-columns:1fr;max-width:1000px;align-items:center}
+@media(min-width:900px){.fn-cards-wrap{grid-template-columns:1.35fr 1fr;gap:1.75rem}}
+
+.fn-pcard{
+  position:relative;background:linear-gradient(180deg,rgba(231,165,68,.08),var(--card) 42%);
+  border:1px solid var(--gold);
+  box-shadow:0 0 0 1px rgba(231,165,68,.35),0 30px 70px -24px rgba(231,165,68,.3),0 30px 60px -25px rgba(0,0,0,.6);
+  padding:clamp(1.8rem,4vw,2.4rem) clamp(1.2rem,4vw,2.2rem) clamp(1.4rem,4vw,2.2rem);
+  display:grid;gap:1.2rem;grid-template-columns:1fr;align-items:center;
 }
-/* botón y rechazo con precio: texto + precio fluyen como una sola frase */
-.fn-cta .btn{display:block;text-align:center}
-.fn-cta .btn .pi,.fn-decline .pi{display:inline}
+@media(min-width:560px){.fn-pcard{grid-template-columns:.8fr 1.2fr}}
+.fn-pcard-ribbon{
+  position:absolute;top:-1px;left:50%;transform:translate(-50%,-50%);
+  background:var(--gold);color:#181008;font-family:var(--font-mono);
+  font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.4em 1.1em;font-weight:700;white-space:nowrap;
+}
+.fn-pcard .mockup{max-width:170px}
+@media(min-width:560px){.fn-pcard .mockup{max-width:210px}}
+.fn-pcard h2{font-size:clamp(1.5rem,4.5vw,2rem);text-transform:uppercase;line-height:1.05}
+.fn-pcard-price{margin-top:.5rem;display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
+.fn-pcard-price .price-old{font-size:1rem}
+.fn-pcard-price .price-new{color:var(--gold)}
+.fn-pcard-price .price-new .cur{font-size:1.2rem;opacity:.85}
+.fn-pcard-price .price-new .num{font-size:clamp(2.6rem,9vw,3.3rem);line-height:1}
+.fn-pcard .offer-list{margin-top:1.1rem;gap:.55rem}
+.fn-pcard .btn{margin-top:1.4rem;display:block;width:100%;text-align:center;padding-block:1.1rem}
+.fn-pcard .microcopy{margin-top:.6rem}
+
+.fn-bcard{
+  background:var(--bg-alt);border:1px solid var(--line);
+  padding:clamp(1.2rem,3.5vw,1.7rem);display:grid;gap:1rem;
+  grid-template-columns:84px 1fr;align-items:center;
+}
+.fn-bcard-media img{width:84px;height:auto;filter:grayscale(55%) brightness(.85);border:1px solid var(--line)}
+.fn-bcard-label{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
+.fn-bcard h3{margin-top:.2rem;font-size:1.2rem;text-transform:uppercase;color:var(--ink)}
+.fn-bcard p{margin-top:.35rem;font-size:.85rem;color:var(--ink-dim);line-height:1.45}
+.fn-bcard-price{margin-top:.5rem;display:flex;align-items:baseline;gap:.55rem}
+.fn-bcard-price .price-old{font-size:.85rem}
+.fn-bcard-price .price-new{font-family:var(--font-display);color:var(--white);font-size:1.5rem;display:inline-flex;gap:.2rem;align-items:baseline}
+.fn-bcard-price .price-new .cur{font-size:.85rem;opacity:.8}
+.fn-bcard .btn{grid-column:1 / -1;display:block;width:100%;text-align:center;padding-block:.95rem;font-size:.84rem}
+
+/* ---------- 3. tres razones ---------- */
+.fn-pillars{display:grid;gap:1rem;grid-template-columns:1fr;max-width:1000px;margin:2rem auto 0}
+@media(min-width:760px){.fn-pillars{grid-template-columns:repeat(3,1fr)}}
+.fn-pillars li{background:var(--card);border:1px solid var(--line);padding:1.3rem 1.25rem}
+.fn-pillars svg{width:24px;height:24px;color:var(--gold)}
+.fn-pillars strong{display:block;margin-top:.7rem;font-family:var(--font-display);font-weight:600;text-transform:uppercase;color:var(--white);font-size:1.1rem;letter-spacing:.01em}
+.fn-pillars span{display:block;margin-top:.35rem;font-size:.88rem;color:var(--ink);line-height:1.5}
+
+/* ---------- 4. bonos (compacto) ---------- */
+.fn-bonus-mini{margin:2rem auto 0;max-width:1000px;display:grid;gap:1.4rem 1rem;grid-template-columns:repeat(2,1fr)}
+@media(min-width:900px){.fn-bonus-mini{grid-template-columns:repeat(4,1fr)}}
+.fn-bonus-mini li{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.45rem}
+.fn-bonus-mini img{width:100%;max-width:130px;height:auto}
+.fn-bonus-mini .tag{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;color:var(--copper);text-transform:uppercase}
+.fn-bonus-mini .name{font-size:.84rem;font-weight:600;color:var(--white);line-height:1.3;max-width:22ch}
+
+/* ---------- 5. garantía + FAQ ---------- */
+.fn-guarantee{
+  max-width:var(--container-narrow);margin:0 auto;display:flex;gap:1rem;align-items:flex-start;
+  border:1px dashed var(--line-strong);padding:1.2rem 1.3rem;background:rgba(12,16,18,.5);
+}
+.fn-guarantee svg{width:36px;height:36px;color:var(--gold);flex-shrink:0}
+.fn-guarantee h3{font-size:1.05rem;text-transform:uppercase}
+.fn-guarantee p{margin-top:.35rem;font-size:.9rem;color:var(--ink)}
+.fn-faq-head{margin-top:2.5rem}
+
+.fn-faq{max-width:var(--container-narrow);margin:1.5rem auto 0;display:flex;flex-direction:column;gap:.6rem}
+.fn-faq-item{background:var(--card);border:1px solid var(--line)}
+.fn-faq-item h3{margin:0;font-family:var(--font-body);font-size:inherit;letter-spacing:0}
+.fn-faq-trigger{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;text-align:left;
+  padding:1rem 1.2rem;font-weight:600;color:var(--gold);font-size:.95rem;line-height:1.4;
+}
+.fn-faq-trigger svg{width:18px;height:18px;flex-shrink:0;transition:transform .25s ease;color:var(--copper)}
+.fn-faq-trigger[aria-expanded="true"] svg{transform:rotate(180deg)}
+.fn-faq-panel{padding:0 1.2rem 1.2rem;font-size:.9rem;color:var(--ink);line-height:1.65}
+
+/* ---------- 6. CTA final ---------- */
+.fn-final{
+  max-width:640px;margin-inline:auto;border:1px solid var(--gold);background:var(--card);
+  box-shadow:0 0 0 1px rgba(231,165,68,.35),0 30px 70px -24px rgba(231,165,68,.28);
+  padding:clamp(1.8rem,5vw,2.8rem) clamp(1.2rem,4vw,2.4rem);
+}
+.fn-final h2{margin-top:1rem;font-size:clamp(1.5rem,4.5vw,2.1rem);text-transform:uppercase}
+.fn-final .fn-deal-price .price-new .num{font-size:clamp(4rem,17vw,6.2rem)}
+
+/* ---------- sticky móvil ---------- */
+.sticky-cta.fn-sticky{padding-bottom:calc(.65rem + env(safe-area-inset-bottom,0px))}
+.sticky-cta.fn-sticky .btn{white-space:nowrap}
+footer.fn-footer{padding-bottom:calc(6.5rem + env(safe-area-inset-bottom,0px))}
+
+/* foco visible (teclado) */
+.fn-page a:focus-visible,.fn-page button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.fn-page .btn:focus-visible{outline-offset:4px}
+
+/* mockup: flotación sutil */
+@media(prefers-reduced-motion:no-preference){.fn-float{animation:fnFloat 6s ease-in-out infinite}}
+@keyframes fnFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* los cards se encogen en pantallas estrechas (320px) aunque el precio convertido sea largo */
+.fn-cards-wrap>*,.fn-pcard>*,.fn-bcard>*{min-width:0}
+.fn-bcard-price,.fn-pcard-price{flex-wrap:wrap}
